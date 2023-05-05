@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!--这个配置使全局的映射器(二级缓存)启用或禁用缓存-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="cacheEnabled" value="true" />
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+    <plugins>
+        <!-- 配置pagehelper分页插件 -->
+        <!-- PageHelper4.1.1 -->
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="mysql" />
+            <property name="offsetAsPageNum" value="false" />
+            <property name="rowBoundsWithCount" value="false" />
+            <property name="pageSizeZero" value="true" />
+            <property name="reasonable" value="false" />
+            <property name="supportMethodsArguments" value="false" />
+            <property name="returnPageInfo" value="none" />
+        </plugin>
+    </plugins>
+    <!-- 环境配置 -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <!-- 数据库连接相关配置 ,这里动态获取config.properties文件中的内容-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://172.18.164.206:3306/train_usercentre"/>
+                <property name="username" value="bsp"/>
+                <property name="password" value="1qaz2wsx"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- mapping文件路径配置 -->
+    <mappers>
+        <mapper resource="bosssoft-train-mybatis/src/main/java/mybatisdemotest/dao/mapper/UserMapper.xml"/>
+<!--        <mapper resource="mybatis/mapper/RoleMapper.xml"/>-->
+<!--        <mapper resource="mybatis/mapper/ResourceMapper.xml"/>-->
+    </mappers>
+
+</configuration>
